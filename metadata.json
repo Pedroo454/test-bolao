@@ -1,0 +1,6 @@
+{
+  "name": "Bolão da Copa 2026",
+  "description": "Aplicativo oficial de Bolão e Ranking da Copa do Mundo FIFA 2026 para a sala 3A da escola Américo Franco, com layout inspirado no Cartola FC.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

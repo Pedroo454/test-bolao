@@ -1,0 +1,163 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Student profile inside the 3A World Cup sweepstakes",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the user (uid or custom ID)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name or nickname of the student"
+        },
+        "pin": {
+          "type": "string",
+          "description": "4-digit distinct numeric unlock pin"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "Selected avatar icon or emoji"
+        },
+        "score": {
+          "type": "number",
+          "description": "Overall accumulated score"
+        },
+        "exactMatches": {
+          "type": "number",
+          "description": "Count of exact score guesses got right"
+        },
+        "outcomeMatches": {
+          "type": "number",
+          "description": "Count of winner/outcome-only guesses got right"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "user"],
+          "description": "Privilege level of the user"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Account registration timestamp"
+        }
+      },
+      "required": ["name", "pin", "avatar", "score", "role"]
+    },
+    "Match": {
+      "title": "World Cup Match",
+      "description": "World Cup fixture representation",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the match (e.g. m_1, m_2)"
+        },
+        "homeTeam": {
+          "type": "string",
+          "description": "Name of home nation"
+        },
+        "awayTeam": {
+          "type": "string",
+          "description": "Name of away nation"
+        },
+        "homeFlag": {
+          "type": "string",
+          "description": "Emoji flag for home country"
+        },
+        "awayFlag": {
+          "type": "string",
+          "description": "Emoji flag for away country"
+        },
+        "group": {
+          "type": "string",
+          "description": "League group or knockout phase name (e.g., Grupo A, Oitavas de Final)"
+        },
+        "stadium": {
+          "type": "string",
+          "description": "Stadium where game takes place"
+        },
+        "city": {
+          "type": "string",
+          "description": "City where game is hosted"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO start time of the game"
+        },
+        "homeScore": {
+          "type": "number",
+          "description": "Final score for home team, null if not played"
+        },
+        "awayScore": {
+          "type": "number",
+          "description": "Final score for away team, null if not played"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["scheduled", "live", "finished"],
+          "description": "Current status of game"
+        },
+        "roundNumber": {
+          "type": "number",
+          "description": "Round identifier for batch locks (e.g., 1, 2, 3...)"
+        }
+      },
+      "required": ["homeTeam", "awayTeam", "group", "date", "status", "roundNumber"]
+    },
+    "Bet": {
+      "title": "Match Bet",
+      "description": "A user's prediction score for a match",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Composite key: userId_matchId"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner student's user ID"
+        },
+        "matchId": {
+          "type": "string",
+          "description": "Target match ID"
+        },
+        "homeTeamBet": {
+          "type": "number",
+          "description": "Home team goals guess"
+        },
+        "awayTeamBet": {
+          "type": "number",
+          "description": "Away team goals guess"
+        },
+        "pointsEarned": {
+          "type": "number",
+          "description": "Calculated points earned for this bet"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When predictions were last modified"
+        }
+      },
+      "required": ["userId", "matchId", "homeTeamBet", "awayTeamBet"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Individual student profile database records"
+    },
+    "/matches/{matchId}": {
+      "schema": "Match",
+      "description": "World cup fixture reference list"
+    },
+    "/bets/{betId}": {
+      "schema": "Bet",
+      "description": "Wagers cast by student participants"
+    }
+  }
+}
