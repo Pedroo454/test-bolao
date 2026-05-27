@@ -16,7 +16,7 @@ Desenvolvido com **React**, **TypeScript**, **Tailwind CSS** e **Firebase Databa
 - **Efeitos de Som**: Sons sintetizados nativos de clique, apito do juiz e grito de gol.
 
 ### Para o Administrador:
-- **Login Protegido**: Credenciais exclusivas (`admin` / `3aamerico!`).
+- **Login Protegido**: Credenciais exclusivas (`admin` / `000000!`).
 - **Gestão de Alunos**: Cadastrar novos alunos e visualizar senhas.
 - **PIN Automático**: Geração inteligente de PINs numéricos de 4 dígitos sem números repetidos (criptografia de acesso facilitado).
 - **Lançamento de Resultados**: Entrar com placares oficiais que disparam a recalculadora de pontos geral instantaneamente.
